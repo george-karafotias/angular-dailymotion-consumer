@@ -1,0 +1,61 @@
+<html>
+
+<head>
+    <title>DailyMotion API</title>
+    <script src="angular.js"></script>
+    <script src="app.js"></script>
+    <script src="services/dailymotion.service.js"></script>
+    <script src="controllers/dailymotion.controller.js"></script>
+    <script src="directives/myenter.directive.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+
+<body ng-app="DailyMotionApp">
+    <div class="header">
+        <h1 class="h1Header">DailyMotion API</h1>
+    </div>
+
+    <div ng-controller="DailyMotionCtrl as ctrl">
+        <div class="row searchBoxArea">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="ctrl.searchVideosByKeyword()">Go!</button>
+                    </span>
+                    <input type="text" my-enter="ctrl.searchVideosByKeyword()" ng-model="ctrl.searchVideoKeyword" class="form-control" placeholder="Search for..." autofocus>
+                </div>
+            </div>
+        </div>
+
+        <ul class="list-group">
+            <li ng-repeat="video in ctrl.videos.list" class="list-group-item">
+                <a ng-href="http://www.dailymotion.com/video/{{video.id}}_{{video.title}}" target="_blank">{{video.title}}</a>
+                <div>Channel: <a href="#" ng-click="ctrl.searchVideosByChannel(video.channel)">{{video.channel}}</a></div>
+            </li>
+        </ul>
+
+        <nav aria-label="Page navigation" ng-show="ctrl.isPaginationVisible">
+            <ul class="pagination">
+                <li ng-show="ctrl.hasPreviousPage">
+                    <a href="#" aria-label="Previous" ng-click="ctrl.retrievePreviousPage()">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li ng-repeat="page in ctrl.pages">
+                    <a href="#" ng-click="ctrl.retrievePage(page)">{{page}}</a>
+                </li>
+                <li ng-show="ctrl.hasNextPage">
+                    <a href="#" aria-label="Next" ng-click="ctrl.retrieveNextPage()">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</body>
+
+</html>

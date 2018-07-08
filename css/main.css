@@ -1,0 +1,12 @@
+div.header {
+    background-color:#0066dc; 
+    color:white; 
+    padding:3px 0px 5px 0px;
+}
+div.searchBoxArea {
+    margin-top:20px;
+    margin-bottom:30px;
+}
+h1.h1Header {
+    font-size:26px;
+}
